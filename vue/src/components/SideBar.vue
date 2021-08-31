@@ -5,8 +5,8 @@
                 default-active="2"
                 class="el-menu-vertical-demo">
             <el-sub-menu index="1">
-                <template #title>导航1</template>
-                <el-menu-item index="1-1">选项1-1</el-menu-item>
+                <template #title>管理</template>
+                <el-menu-item index="staff">员工管理</el-menu-item>
             </el-sub-menu>
             <el-menu-item index="2">
                 <i class="el-icon-menu"></i>

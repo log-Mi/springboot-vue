@@ -9,7 +9,7 @@
               </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item>员工id</el-dropdown-item>
+                        <el-dropdown-item>个人中心</el-dropdown-item>
                         <el-dropdown-item>退出账号</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>

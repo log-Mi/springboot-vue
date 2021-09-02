@@ -1,11 +1,34 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Layout from '../layout/Layout.vue'
+
 
 const routes = [{
     path: '/',
-    name: 'Home',
-    component: Home
-}, ]
+    name: 'Layout',
+    component: Layout,
+    redirect: '/login',
+    children: [{
+        path: 'staff',
+        name: 'Staff',
+        component: () =>
+            import ("@/views/Staff")
+    }, {
+        path: 'flower',
+        name: 'Flower',
+        component: () =>
+            import ("@/views/Flower")
+    }]
+}, {
+    path: '/login',
+    name: 'Login',
+    component: () =>
+        import ("@/views/Login")
+}, {
+    path: '/register',
+    name: 'Register',
+    component: () =>
+        import ("@/views/Register")
+}]
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),

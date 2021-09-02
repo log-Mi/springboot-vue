@@ -5,12 +5,12 @@
         <div style="width: 100px">
             <el-dropdown>
               <span class="el-dropdown-link">
-                张三<i class="el-icon-arrow-down el-icon--right"></i>
+                {{staffName}}<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
                 <template #dropdown>
                     <el-dropdown-menu>
                         <el-dropdown-item>个人中心</el-dropdown-item>
-                        <el-dropdown-item>退出账号</el-dropdown-item>
+                        <el-dropdown-item @click="logout">退出账号</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -19,7 +19,23 @@
 </template>
 
 <script>
+    import router from '../router'
     export default {
         name: 'MyHeader',
+        computed:{
+            staffName(){
+                let tmp = JSON.parse(sessionStorage.getItem('staff'))
+                if (!tmp){
+                    router.push('/login')
+                }
+                // console.log(tmp);
+                return tmp.staffName
+            }
+        },
+        methods: {
+            logout(){
+                this.$router.push('/login')
+            }
+        },
     }
 </script>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '../router';
 
 const request = axios.create({
     timeout: 50000
@@ -11,6 +12,10 @@ request.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
 
     // config.headers['token'] = user.token;  // 设置请求头
+    let staffJSON = sessionStorage.getItem('staff')
+    if (!staffJSON) {
+        router.push('/login')
+    }
     return config
 }, error => {
     return Promise.reject(error)

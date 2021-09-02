@@ -20,6 +20,34 @@ public class StaffController {
     @Resource
     StaffMapper staffMapper;
 
+
+    @PostMapping("/register")
+    public Result<?> register(@RequestBody Staff staff){
+        Staff res = staffMapper.selectOne(Wrappers.<Staff>lambdaQuery().eq(Staff::getStaffName, staff.getStaffName()));
+        if (res != null)
+        {
+            return Result.error("-1", "用户名重复");
+        }
+        if (staff.getPassword() == null)
+        {
+            staff.setPassword("12345");
+        }
+        staffMapper.insert(staff);
+        return Result.success();
+    }
+
+
+    //登录
+    @PostMapping("/login")
+    public Result<?> login(@RequestBody Staff staff){
+        Staff res = staffMapper.selectOne(Wrappers.<Staff>lambdaQuery().eq(Staff::getStaffName, staff.getStaffName()).eq(Staff::getPassword, staff.getPassword()));
+        if (res == null)
+        {
+            return Result.error("-1", "用户名或密码错误");
+        }
+        return Result.success(res);
+    }
+
     //新增
     @PostMapping
     public Result<?> save(@RequestBody Staff staff){

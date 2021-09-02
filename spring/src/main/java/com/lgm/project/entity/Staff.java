@@ -11,7 +11,7 @@ public class Staff {
     @TableId(value = "staff_id", type = IdType.AUTO)
     private Integer staffId;
 
-    private  String staffName;
+    private String staffName;
 
     private String password;
 

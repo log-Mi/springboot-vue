@@ -2,23 +2,16 @@
     <div>
         <el-menu
                 style="width: 200px; min-height: calc(100vh - 50px)"
-                default-active="2"
+                :default-active="path"
+                router
                 class="el-menu-vertical-demo">
             <el-sub-menu index="1">
-                <template #title>管理</template>
-                <el-menu-item index="staff">员工管理</el-menu-item>
+                <template #title><i class="el-icon-setting"></i>系统管理</template>
+                <el-menu-item index="/staff">员工管理</el-menu-item>
             </el-sub-menu>
-            <el-menu-item index="2">
+            <el-menu-item index="/flower">
                 <i class="el-icon-menu"></i>
-                <template #title>导航二</template>
-            </el-menu-item>
-            <el-menu-item index="3" disabled>
-                <i class="el-icon-document"></i>
-                <template #title>导航三</template>
-            </el-menu-item>
-            <el-menu-item index="4">
-                <i class="el-icon-setting"></i>
-                <template #title>导航四</template>
+                <template #title>花品管理</template>
             </el-menu-item>
         </el-menu>
     </div>
@@ -29,8 +22,10 @@
 
     export default {
         name: 'SideBar',
-        components: {
-
+        data(){
+            return {
+                path: this.$route.path
+            }
         }
     }
 </script>

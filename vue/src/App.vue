@@ -1,30 +1,13 @@
 <template>
   <div>
-    <!-- 头部 -->
-    <MyHeader />
-
-    <!-- 主体部分 -->
-    <div style="display: flex">
-
-      <!-- 侧边栏 -->
-      <SideBar/>
-
-      <!-- 内容区域 -->
-      <router-view style="flex:1"/>
-    </div>
+    <router-view/>
   </div>
-  
 </template>
 
 <script>
-import MyHeader from '@/components/MyHeader'
-import SideBar from '@/components/SideBar'
 export default {
-    name: 'Layout',
-    components: {
-        MyHeader,
-        SideBar
-    }
+    name: 'App',
+    
 }
 </script>
 

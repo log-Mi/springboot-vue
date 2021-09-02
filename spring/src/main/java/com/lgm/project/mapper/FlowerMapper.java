@@ -1,7 +1,7 @@
 package com.lgm.project.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lgm.project.entity.Staff;
+import com.lgm.project.entity.Flower;
 
-public interface StaffMapper extends BaseMapper<Staff> {
+public interface FlowerMapper extends BaseMapper<Flower> {
 }

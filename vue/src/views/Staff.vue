@@ -37,6 +37,14 @@
       label="年龄">
       </el-table-column>
       <el-table-column
+      label="权限">
+      <template #default="scope">
+        <span v-if="scope.row.role===0">店长</span>
+        <span v-if="scope.row.role===1">经理</span>
+        <span v-if="scope.row.role===2">员工</span>
+      </template>
+      </el-table-column>
+      <el-table-column
       label="操作">
       <template #default="scope">
         <el-button @click="handleEdit(scope.row)" size="small">编辑</el-button>
@@ -50,6 +58,7 @@
     </el-table-column>
     </el-table>
 
+    <!-- 分页按钮 -->
     <div style="margin: 10px 0">
       <el-pagination
       @size-change="handleSizeChange"
@@ -61,6 +70,7 @@
       :total="total">
     </el-pagination>
 
+    <!-- 新增弹出对话框 -->
     <el-dialog
       title="提示"
       v-model="dialogVisible"
@@ -78,7 +88,7 @@
           <el-input v-model="form.age" style="width: 80%"></el-input>
         </el-form-item>
       </el-form>
-      <span slot="footer" class="dialog-footer">
+      <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
       </span>
@@ -186,11 +196,12 @@ export default {
             pageNum: this.currentPage, 
             pageSize: this.pageSize, 
             search: this.search}}).then(res => {
-          this.tableData = res.data.records
-          this.total = res.data.total
+              this.tableData = res.data.records.filter((d)=>{
+                return d.staffId != 1
+              })
+              this.total = res.data.total
         })
       }
-
     },
 }
 </script>

@@ -45,7 +45,7 @@ export default {
             this.$refs['form'].validate((valid) => {
                 if (valid) {
                     request.post("http://localhost:8081/staff/login", this.form).then(res => {
-                        console.log(res);
+                        // console.log(res);
                         if (res.code === '0'){
                             this.$message({
                                 type: "success",

@@ -19,4 +19,6 @@ public class Staff {
 
     private String sex;
 
+    private Integer role;
+
 }

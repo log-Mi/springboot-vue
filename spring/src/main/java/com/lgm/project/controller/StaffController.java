@@ -81,6 +81,10 @@ public class StaffController {
         return Result.success(staffPage);
     }
 
+    //根据员工id查询
+    @GetMapping("/{staffId}")
+    public Result<?> getById(@PathVariable Long staffId){ return Result.success(staffMapper.selectById(staffId));}
+
     //删除
     @DeleteMapping("/{staffId}")
     public Result<?> delete(@PathVariable Long staffId){

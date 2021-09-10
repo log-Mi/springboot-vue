@@ -1,19 +1,30 @@
-# springboot_vue_proj
+# 花店管理系统
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### 实现功能
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 花店数据库抽象，包括员工、花品和 供应商表
+- 前端登录校验和注册页面
+- 前端路由显示相关页面，与数据库表一一对应
+- 后端根据前端请求，对数据库进行操作，返回数据和信息
+
+### 使用技术
+
+#### 前端
+
+- ​	框架：vue3.0 + vue-cli脚手架
+- ​	组件库：element-UI
+
+#### 后端
+
+- ​	框架：springboot
+- ​	Java版本：JDK1.8
+- ​	数据库操作：Mybatis-Plus
+
+#### 数据库相关
+
+- ​	数据库：MySQ L5.7
+- ​	工具：Navicat
+
+

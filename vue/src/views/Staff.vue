@@ -87,6 +87,10 @@
         <el-form-item label="年龄">
           <el-input v-model="form.age" style="width: 80%"></el-input>
         </el-form-item>
+        <el-form-item label="职能">
+          <el-radio v-model="form.role" label="1">经理</el-radio>
+          <el-radio v-model="form.role" label="2">员工</el-radio>
+        </el-form-item>
       </el-form>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
@@ -117,10 +121,10 @@ export default {
         tableData: []
       }
     },
-    created(){
-      this.load()
-    },
-    methods: {
+  created(){
+    this.load()
+  },
+  methods: {
       handleEdit(row){
         this.form = JSON.parse(JSON.stringify(row))
         this.dialogVisible = true
@@ -202,6 +206,6 @@ export default {
               this.total = res.data.total
         })
       }
-    },
+  },
 }
 </script>

@@ -1,4 +1,7 @@
 package com.lgm.project.mapper;
 
-public interface ProvInfoMapper {
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lgm.project.entity.ProvInfo;
+
+public interface ProvInfoMapper extends BaseMapper<ProvInfo> {
 }

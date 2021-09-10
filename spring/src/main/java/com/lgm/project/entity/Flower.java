@@ -26,4 +26,6 @@ public class Flower {
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime;
 
+    private Integer provId;
+
 }

@@ -17,6 +17,11 @@ const routes = [{
         name: 'Flower',
         component: () =>
             import ("@/views/Flower")
+    }, {
+        path: 'provInfo',
+        name: 'ProvInfo',
+        component: () =>
+            import ("@/views/ProvInfo")
     }]
 }, {
     path: '/login',

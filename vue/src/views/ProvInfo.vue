@@ -43,6 +43,7 @@
       <template #default="scope">
         <el-button @click="handleEdit(scope.row)" size="small">编辑</el-button>
         <el-popconfirm
+          v-if="canDelete"
           title="这是一段内容确定删除吗？" @confirm="handleDelete(scope.row.provId)">
           <template #reference>
             <el-button size="small" type="danger">删除</el-button>
@@ -108,91 +109,100 @@ export default {
         tableData: []
       }
     },
-    created(){
+  computed:{
+    canDelete(){
+      let staffStr = sessionStorage.getItem("staff") || '{}'
+            
+      let staff = JSON.parse(staffStr)
+
+      return staff.role === 0 || staff.role === 1
+    }
+  },
+  created(){
+    this.load()
+  },
+  methods: {
+    handleEdit(row){
+      this.form = JSON.parse(JSON.stringify(row))
+      this.dialogVisible = true
+    },
+    handleDelete(provId){
+      request.delete("http://localhost:8081/provInfo/" + provId).then(res=>{
+        if (res.code === '0'){
+            this.$message({
+              type: "success",
+              message: "删除成功"
+            })
+          }else{
+            this.$message({
+              type: "error",
+              message: res.msg
+            })
+          }
+        this.load()
+      })
+    },
+    handleSizeChange(pageSize){
+      this.pageSize = pageSize
       this.load()
     },
-    methods: {
-      handleEdit(row){
-        this.form = JSON.parse(JSON.stringify(row))
-        this.dialogVisible = true
-      },
-      handleDelete(provId){
-        request.delete("http://localhost:8081/provInfo/" + provId).then(res=>{
-          if (res.code === '0'){
-              this.$message({
-                type: "success",
-                message: "删除成功"
-              })
-            }else{
-              this.$message({
-                type: "error",
-                message: res.msg
-              })
-            }
-          this.load()
-        })
-      },
-      handleSizeChange(pageSize){
-        this.pageSize = pageSize
-        this.load()
-      },
-      handleCurrentChange(pageNum){
-        this.currentPage = pageNum
-        this.load()
-      },
-      add(){
-        this.dialogVisible = true
-        this.form = {}
-      },
-      save(){
-        if (this.form.provId){
-            request.put("http://localhost:8081/provInfo", this.form).then(res => {
-                console.log(res);
-                if (res.code === '0'){
-                this.$message({
-                    type: "success",
-                    message: "更新成功"
-                })
-                }else{
-                this.$message({
-                    type: "error",
-                    message: res.msg
-                })
-                }
-            })
-            this.load()
-            this.dialogVisible = false
-        }else{
-            request.post("http://localhost:8081/provInfo", this.form).then(res => {
-                // console.log(res);
-                if (res.code === '0'){
-                this.$message({
-                    type: "success",
-                    message: "新建成功"
-                })
-                }else{
-                this.$message({
-                    type: "error",
-                    message: res.msg
-                })
-                }
-            })
-            this.load()
-            this.dialogVisible = false
-        }
-        
-      },
-      load(){
-        request.get("http://localhost:8081/provInfo", {
-          params:{
-            pageNum: this.currentPage, 
-            pageSize: this.pageSize, 
-            search: this.search}}).then(res => {
-          this.tableData = res.data.records
-          this.total = res.data.total
-        })
-      }
-
+    handleCurrentChange(pageNum){
+      this.currentPage = pageNum
+      this.load()
     },
+    add(){
+      this.dialogVisible = true
+      this.form = {}
+    },
+    save(){
+      if (this.form.provId){
+          request.put("http://localhost:8081/provInfo", this.form).then(res => {
+              console.log(res);
+              if (res.code === '0'){
+              this.$message({
+                  type: "success",
+                  message: "更新成功"
+              })
+              }else{
+              this.$message({
+                  type: "error",
+                  message: res.msg
+              })
+              }
+          })
+          this.load()
+          this.dialogVisible = false
+      }else{
+          request.post("http://localhost:8081/provInfo", this.form).then(res => {
+              // console.log(res);
+              if (res.code === '0'){
+              this.$message({
+                  type: "success",
+                  message: "新建成功"
+              })
+              }else{
+              this.$message({
+                  type: "error",
+                  message: res.msg
+              })
+              }
+          })
+          this.load()
+          this.dialogVisible = false
+      }
+      
+    },
+    load(){
+      request.get("http://localhost:8081/provInfo", {
+        params:{
+          pageNum: this.currentPage, 
+          pageSize: this.pageSize, 
+          search: this.search}}).then(res => {
+        this.tableData = res.data.records
+        this.total = res.data.total
+      })
+    }
+
+  },
 }
 </script>
